@@ -1,3 +1,20 @@
+h2 {
+  margin-top: 20px;
+  margin-bottom: 20ps;
+  text-align: center;
+}
+
 .btn-search {
   width: 100%;
+}
+
+.search-elements {
+  height: 110px;
+  /* background-color: lightgrey; */
+  margin-bottom: 20px;
+}
+
+form {
+  width: 700px;
+  margin: 0 auto;
 }
