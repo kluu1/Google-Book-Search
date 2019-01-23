@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import SaveBtn from '../../components/SaveBtn';
-import DeleteBtn from '../../components/DeleteBtn';
 import { Col, Row, Container } from '../../components/Grid';
 import { Input, FormBtn } from '../../components/Form';
 import { List, ListItem } from '../../components/List';
@@ -55,6 +54,7 @@ export default class Books extends Component {
     });
   };
 
+  // Handle to search book
   handleFormSubmit = event => {
     event.preventDefault();
     this.searchBooks();
