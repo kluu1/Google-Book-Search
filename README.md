@@ -1,5 +1,5 @@
 # Google Books Search
-This is simple MERN application allows users to search and save for books using the Google Books API.
+A simple web application built with React.js, Node.js, and MongoDB that allows users to search and save for books using the Google Books API.
 
 ## Technologies Used
 * React.js
