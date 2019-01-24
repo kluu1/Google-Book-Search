@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
 // Add routes, both API and view
 app.use(routes);
 
-const db = config.get('MongoDB.URI');
+const db = process.env.MONGODB_URI;
 
 // Connect to MongoDB
 mongoose
