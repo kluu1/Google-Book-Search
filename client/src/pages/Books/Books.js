@@ -16,6 +16,17 @@ export default class Books extends Component {
     search: ''
   };
 
+  loadBooks = () => {
+    API.getBooks()
+      .then(res => this.setState({ savedBooks: res.data }))
+      .catch(err => console.log(err));
+  };
+
+  // Load books from MongoDB
+  componentDidMount() {
+    this.loadBooks();
+  }
+
   // Search for books
   searchBooks = () => {
     API.searchBooks(this.state.search)
@@ -42,6 +53,7 @@ export default class Books extends Component {
       link,
       image
     })
+      .then(() => this.loadBooks())
       .then(res => console.log(res))
       .catch(err => console.log(err));
   };
@@ -90,6 +102,27 @@ export default class Books extends Component {
                 <Col size="md-12">
                   <h2>Search Results</h2>
                   {this.state.books.map(book => {
+                    const isPresentInSavedBooks = !!this.state.savedBooks.find(
+                      savedBook => {
+                        return savedBook.id === book.id;
+                      }
+                    );
+
+                    let saveBtnMarkup = undefined;
+
+                    if (!isPresentInSavedBooks) {
+                      saveBtnMarkup = (
+                        <SaveBtn
+                          data-id={book.id}
+                          data-authors={book.volumeInfo.authors}
+                          data-description={book.volumeInfo.description}
+                          data-title={book.volumeInfo.title}
+                          data-image={book.volumeInfo.imageLinks.smallThumbnail}
+                          data-link={book.volumeInfo.previewLink}
+                          onClick={this.saveBook}
+                        />
+                      );
+                    }
                     return (
                       <ListItem key={book.id}>
                         <Row>
@@ -108,19 +141,7 @@ export default class Books extends Component {
                             </a>
                             <p>{book.volumeInfo.description}</p>
                           </Col>
-                          <Col size="md-2">
-                            <SaveBtn
-                              data-id={book.id}
-                              data-authors={book.volumeInfo.authors}
-                              data-description={book.volumeInfo.description}
-                              data-title={book.volumeInfo.title}
-                              data-image={
-                                book.volumeInfo.imageLinks.smallThumbnail
-                              }
-                              data-link={book.volumeInfo.previewLink}
-                              onClick={this.saveBook}
-                            />
-                          </Col>
+                          <Col size="md-2">{saveBtnMarkup}</Col>
                         </Row>
                       </ListItem>
                     );
