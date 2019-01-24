@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const logger = require('morgan'); // for debugging
 const routes = require('./routes');
-const config = require('config');
 const PORT = process.env.PORT || 3001;
 
 // Initialize Express for debugging & body parsing
