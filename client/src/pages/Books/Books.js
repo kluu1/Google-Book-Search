@@ -16,13 +16,13 @@ export default class Books extends Component {
     search: ''
   };
 
+  // Load saved books from MongoDB
   loadBooks = () => {
     API.getBooks()
       .then(res => this.setState({ savedBooks: res.data }))
       .catch(err => console.log(err));
   };
 
-  // Load books from MongoDB
   componentDidMount() {
     this.loadBooks();
   }
@@ -34,6 +34,7 @@ export default class Books extends Component {
       .catch(err => console.log(err));
   };
 
+  // Save the book into MongoDB
   saveBook = event => {
     // Destructure data from SaveBtn clicked
     const {
@@ -44,7 +45,7 @@ export default class Books extends Component {
       link,
       image
     } = event.target.dataset;
-    // Save the book into MongoDB
+    // Make the call to save book
     API.saveBook({
       id,
       authors,
@@ -107,9 +108,9 @@ export default class Books extends Component {
                         return savedBook.id === book.id;
                       }
                     );
-
+                    // Create an empty object for saved button
                     let saveBtnMarkup = undefined;
-
+                    // If book is not in saved books array, create the button
                     if (!isPresentInSavedBooks) {
                       saveBtnMarkup = (
                         <SaveBtn
