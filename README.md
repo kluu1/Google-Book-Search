@@ -3,6 +3,9 @@ A simple web application built with React.js, Node.js, and MongoDB that allows u
 
 Live Demo: https://gtbc-google-book-search.herokuapp.com/
 
+## Preview
+![Alt text](/screenshot.png?raw=true "screenshot")
+
 ## Technologies Used
 * React.js
 * React-router-dom
